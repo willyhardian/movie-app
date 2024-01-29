@@ -1,14 +1,90 @@
+require('dotenv').config();
+
 const express = require("express");
 const app = express();
 const port = 3000;
 
-const { Movie } = require("./models");
+const { Movie, User } = require("./models");
+const { comparePassword } = require("./helpers/bcrypt");
+const { signToken } = require("./helpers/jwt");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello HCK 67!");
+});
+
+app.post("/users/register", async (req, res) => {
+  /* 
+    1. ambil data dari req.body
+    2. create user
+    3. response
+  */
+  try {
+    let { email, password } = req.body;
+    let user = await User.create({
+      email,
+      password,
+    });
+    res.status(201).json({
+      id: user.id,
+      email: user.email,
+    });
+  } catch (error) {
+    console.log(error.name);
+    if (
+      error.name === "SequelizeUniqueConstraintError" ||
+      error.name === "SequelizeValidationError"
+    ) {
+      return res.status(400).json({ message: error.errors[0].message });
+    }
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.post("/users/login", async (req, res) => {
+  /* 
+    ? Login itu ngapain ?
+    1. ambil data dari req.body
+    2. validasi inputan dari user
+    3. cari email user di db
+    4. kalau ada, cocokin password
+    5. kalau aman, kasih access_token dari jwt
+  */
+  // 1.
+  let { email, password } = req.body;
+  try {
+    // 2.
+    if (!email || !password) {
+      throw { name: "InvalidInput" };
+    }
+
+    // 3.
+    const user = await User.findOne({
+      where: { email },
+    });
+
+    if (!user || !comparePassword(password, user.password)) {
+      console.log(user);
+      throw { name: "InvalidUser" };
+    }
+
+    // Response dengan mengirim access_token yang dibuat dari jwt
+    const token = signToken({
+      id: user.id,
+    });
+    res.status(200).json({ access_token: token });
+  } catch (error) {
+    console.error("error", error);
+    if (error.name === "InvalidInput") {
+      return res.status(400).json({ meessage: "email/password is required" });
+    }
+    if (error.name === "InvalidUser") {
+      return res.status(401).json({ message: "Invalid email/password" });
+    }
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 app.get("/movies", async function (request, response) {

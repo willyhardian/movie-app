@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Movie.belongsTo(models.User, {
+        foreignKey: "UserId"
+      })
     }
   }
   Movie.init({
@@ -39,6 +42,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: "isNowShowing is required"
       }
+    },
+    UserId: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,
