@@ -6,6 +6,14 @@ My Movies App is an application to manage your assets. This app has :
 &nbsp;
 
 ## RESTful endpoints
+
+- Movies
+  - [GET Movies](#get-movies)
+  - [POST Movies](#post-movies)
+  - [PUT Movies](#put-moviesid)
+  - [PATCH Movies](#patch-moviesidshow)
+  - [DELETE Movies](#delete-moviesid)
+
 ### GET /movies
 
 > Get all movies
@@ -123,6 +131,73 @@ _Response (400 - Bad Request)_
   "message": "title is required"
   OR
   "message": "synopsis is required"
+}
+```
+
+_Response (404 - Not Found)_
+```
+{
+  "message": "Data not found"
+}
+```
+
+---
+### PATCH /movies/:id/show
+
+> Update movie isNowShowing by id
+
+_Request Header_
+```
+not needed
+```
+
+_Request Body_
+```
+{
+  "isNowShowing": boolean
+}
+```
+
+_Response (200 - Ok)_
+```
+{
+  "message": "Movie <id> status has been updated to <isNowShowing>"
+}
+```
+
+_Response (400 - Bad Request)_
+```
+{
+  "message": "isNowShowing is required"
+}
+```
+
+_Response (404 - Not Found)_
+```
+{
+  "message": "Data not found"
+}
+```
+
+---
+### DELETE /movies/:id
+
+> Remove movie by id
+
+_Request Header_
+```
+not needed
+```
+
+_Request Body_
+```
+not needed
+```
+
+_Response (200 - Ok)_
+```
+{
+  "message": "Movie <id> has been removed"
 }
 ```
 

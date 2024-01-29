@@ -33,7 +33,13 @@ module.exports = (sequelize, DataTypes) => {
     releaseDate: DataTypes.DATE,
     coverUrl: DataTypes.TEXT,
     rating: DataTypes.FLOAT,
-    isNowShowing: DataTypes.BOOLEAN
+    isNowShowing: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: "isNowShowing is required"
+      }
+    }
   }, {
     sequelize,
     modelName: 'Movie',

@@ -42,22 +42,22 @@ app.post("/movies", async (req, res) => {
 
 app.put("/movies/:id", async (req, res) => {
   try {
-    let movie = await Movie.findByPk(req.params.id)
+    let movie = await Movie.findByPk(req.params.id);
     console.log(movie);
-    if(!movie) throw {name: "NotFound"}
+    if (!movie) throw { name: "NotFound" };
 
-    await movie.update(req.body)
+    await movie.update(req.body);
 
     res.status(200).json({
-      message: `Movie ${req.params.id} has been updated`
-    })
+      message: `Movie ${req.params.id} has been updated`,
+    });
   } catch (error) {
-    if(error.name === "NotFound") {
+    if (error.name === "NotFound") {
       return res.status(404).json({
         message: "Data not found",
       });
     }
-    if(error.name === "SequelizeValidationError") {
+    if (error.name === "SequelizeValidationError") {
       return res.status(400).json({
         message: error.errors[0].message,
       });
@@ -66,11 +66,56 @@ app.put("/movies/:id", async (req, res) => {
       message: "Internal server error",
     });
   }
-})
+});
 
 app.patch("/movies/:id/show", async (req, res) => {
-  // edit attribute isNowShowing
-})
+  try {
+    let movie = await Movie.findByPk(req.params.id);
+    if (!movie) throw { name: "NotFound" };
+
+    await movie.update({ isNowShowing: req.body.isNowShowing });
+
+    res.status(200).json({
+      message: `Movie ${req.params.id} status has been updated to ${req.body.isNowShowing}`,
+    });
+  } catch (error) {
+    if (error.name === "NotFound") {
+      return res.status(404).json({
+        message: "Data not found",
+      });
+    }
+    if (error.name === "SequelizeValidationError") {
+      return res.status(400).json({
+        message: error.errors[0].message,
+      });
+    }
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
+app.delete("/movies/:id", async (req, res) => {
+  try {
+    let movie = await Movie.findByPk(req.params.id);
+    if (!movie) throw { name: "NotFound" };
+
+    await movie.destroy();
+
+    res.status(200).json({
+      message: `Movie ${req.params.id} has been removed`,
+    });
+  } catch (error) {
+    if (error.name === "NotFound") {
+      return res.status(404).json({
+        message: "Data not found",
+      });
+    }
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
