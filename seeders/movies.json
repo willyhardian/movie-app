@@ -6,8 +6,7 @@
     "releaseDate": "2016-06-18",
     "coverUrl": "https://cdn.myanimelist.net/images/manga/1/182270.jpg",
     "rating": 8.39,
-    "isNowShowing": false,
-    "UserId": 1
+    "isNowShowing": false
   },
   {
     "title": "Weathering with You",
@@ -16,8 +15,7 @@
     "releaseDate": "2019-07-19",
     "coverUrl": "https://cdn.myanimelist.net/images/anime/1880/101146.jpg",
     "rating": 8.29,
-    "isNowShowing": false,
-    "UserId": 1
+    "isNowShowing": false
   },
   {
     "title": "Suzume no Tojimari",
@@ -26,8 +24,7 @@
     "releaseDate": "2022-11-11",
     "coverUrl": "https://cdn.myanimelist.net/images/anime/1598/128450.jpg",
     "rating": 8.39,
-    "isNowShowing": true,
-    "UserId": 1
+    "isNowShowing": true
   },
   {
     "title": "Dragon Ball Super: Broly",
@@ -36,8 +33,7 @@
     "releaseDate": "2018-12-14",
     "coverUrl": "https://cdn.myanimelist.net/images/anime/1575/93498.jpg",
     "rating": 8.16,
-    "isNowShowing": true,
-    "UserId": 1
+    "isNowShowing": true
   },
   {
     "title": "The Last: Naruto the Movie",
@@ -46,8 +42,7 @@
     "releaseDate": "2014-12-06",
     "coverUrl": "https://cdn.myanimelist.net/images/anime/1491/134498.jpg",
     "rating": 7.79,
-    "isNowShowing": false,
-    "UserId": 1
+    "isNowShowing": false
   },
   {
     "title": "Kimetsu no Yaiba Movie: Mugen Ressha-hen",
@@ -56,8 +51,7 @@
     "releaseDate": "2020-10-16",
     "coverUrl": "https://cdn.myanimelist.net/images/anime/1704/106947.jpg",
     "rating": 8.61,
-    "isNowShowing": false,
-    "UserId": 1
+    "isNowShowing": false
   },
   {
     "title": "Black Clover: Sword of the Wizard King",
@@ -66,7 +60,6 @@
     "releaseDate": "2023-06-16",
     "coverUrl": "https://cdn.myanimelist.net/images/anime/1337/136363.jpg",
     "rating": 8.1,
-    "isNowShowing": true,
-    "UserId": 1
+    "isNowShowing": true
   }
 ]
