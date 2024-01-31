@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const movies = require("./movies.json")
+    const movies = require("../data/movies.json")
     await queryInterface.bulkInsert(
       "Movies",
       movies.map((movie) => {
